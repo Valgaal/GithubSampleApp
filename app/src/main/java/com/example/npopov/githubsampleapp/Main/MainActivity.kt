@@ -2,6 +2,7 @@ package com.example.npopov.githubsampleapp.Main
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.example.npopov.githubsampleapp.Models.Users
 import com.example.npopov.githubsampleapp.R
 
 class MainActivity : AppCompatActivity(), ListView {
@@ -11,7 +12,7 @@ class MainActivity : AppCompatActivity(), ListView {
         setContentView(R.layout.activity_main)
     }
 
-    override fun showUsers(users: Users?) {
+    override fun showUsers(users: List<Users?>) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
