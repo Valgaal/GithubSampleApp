@@ -5,12 +5,12 @@ import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy
 import com.arellomobile.mvp.viewstate.strategy.OneExecutionStateStrategy
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
 import com.example.npopov.githubsampleapp.AddToEndSingleByTagStateStrategy
-import com.example.npopov.githubsampleapp.Models.Users
+import com.example.npopov.githubsampleapp.Models.User
 
 @StateStrategyType(AddToEndSingleStrategy::class)
 interface ListView : MvpView {
 
-    fun showUsers(users: List<Users?> )
+    fun showUsers(users: List<User> )
 
     @StateStrategyType(OneExecutionStateStrategy::class)
     fun showError(message: String?)
