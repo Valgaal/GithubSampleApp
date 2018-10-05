@@ -3,37 +3,52 @@ package com.example.npopov.githubsampleapp.Main
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import com.example.npopov.githubsampleapp.Models.User
+import android.widget.Toast
+import com.arellomobile.mvp.presenter.InjectPresenter
+import com.arellomobile.mvp.presenter.ProvidePresenter
+import com.example.npopov.githubsampleapp.Models.Repository
 import com.example.npopov.githubsampleapp.R
 
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), ListView {
-    private var mAdapter: UsersListAdapter? = null;
+    private var mAdapter: UsersListAdapter? = null
+
+    @InjectPresenter
+    private lateinit var mListPresenter: ListPresenter
+
+    @ProvidePresenter
+    fun provideListPresenter(): ListPresenter{
+        return ListPresenter(Repository.getInstance(this))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         rw_trending.layoutManager = LinearLayoutManager(this)
-        mAdapter = UsersListAdapter(ArrayList<User>(), this ,{
+        mAdapter = UsersListAdapter(ArrayList<ListModel>(), this ,{
             //open Fragment details in Presenter
         })
+        mListPresenter.loadUsers()
         rw_trending.adapter = mAdapter
+        swipe_refresh.setOnClickListener{
+            mListPresenter.loadUsers()
+        }
     }
 
-    override fun showUsers(users: List<User>) {
+    override fun showUsers(users: List<ListModel>) {
         mAdapter?.setData(users)
     }
 
     override fun showError(message: String?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     override fun startLoading() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        swipe_refresh.isRefreshing = true;
     }
 
     override fun finishLoading() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        swipe_refresh.isRefreshing = false;
     }
 }

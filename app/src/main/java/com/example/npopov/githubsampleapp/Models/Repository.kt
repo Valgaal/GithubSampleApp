@@ -25,7 +25,7 @@ class Repository private constructor(context: Context){
 
     }
 
-    private fun getUsers(since: Int): Observable<List<UserResponse>> {
+    public fun getUsers(since: Int): Observable<List<UserResponse>> {
         return api.getUsers(since)
     }
 

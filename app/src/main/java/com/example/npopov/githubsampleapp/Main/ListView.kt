@@ -10,7 +10,7 @@ import com.example.npopov.githubsampleapp.Models.User
 @StateStrategyType(AddToEndSingleStrategy::class)
 interface ListView : MvpView {
 
-    fun showUsers(users: List<User> )
+    fun showUsers(users: List<ListModel> )
 
     @StateStrategyType(OneExecutionStateStrategy::class)
     fun showError(message: String?)

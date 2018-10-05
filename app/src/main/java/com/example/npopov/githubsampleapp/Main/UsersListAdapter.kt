@@ -11,9 +11,9 @@ import com.squareup.picasso.Picasso
 
 import kotlinx.android.synthetic.main.rw_item.view.*
 
-class UsersListAdapter(private var items: List<User>,
+class UsersListAdapter(private var items: List<ListModel>,
                        private val context: Context,
-                       val listener: (User) -> Unit) : RecyclerView.Adapter<UsersListAdapter.ViewHolder>() {
+                       val listener: (ListModel) -> Unit) : RecyclerView.Adapter<UsersListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(context).inflate(R.layout.rw_item, parent, false))
@@ -27,7 +27,7 @@ class UsersListAdapter(private var items: List<User>,
         return items.size
     }
 
-    fun setData(data: List<User>){
+    fun setData(data: List<ListModel>){
         items = data
         notifyDataSetChanged()
     }
@@ -37,7 +37,7 @@ class UsersListAdapter(private var items: List<User>,
        private val loginText = itemView.loginTextView
        private val poster = itemView.avatarImageView
 
-        fun bindData(user: User) {
+        fun bindData(user: ListModel) {
             with(itemView) {
                 loginText.text = user.login
 
