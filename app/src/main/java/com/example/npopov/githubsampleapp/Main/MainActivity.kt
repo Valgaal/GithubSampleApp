@@ -1,9 +1,9 @@
 package com.example.npopov.githubsampleapp.Main
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast
+import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.example.npopov.githubsampleapp.Models.Repository
@@ -11,11 +11,11 @@ import com.example.npopov.githubsampleapp.R
 
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), ListView {
+class MainActivity : MvpAppCompatActivity(), ListView {
     private var mAdapter: UsersListAdapter? = null
 
     @InjectPresenter
-    private lateinit var mListPresenter: ListPresenter
+    lateinit var mListPresenter: ListPresenter
 
     @ProvidePresenter
     fun provideListPresenter(): ListPresenter{
