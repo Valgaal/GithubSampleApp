@@ -1,4 +1,4 @@
-package com.example.npopov.githubsampleapp.Main
+package com.example.npopov.githubsampleapp
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -7,7 +7,8 @@ import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.example.npopov.githubsampleapp.Models.Repository
-import com.example.npopov.githubsampleapp.R
+import com.example.npopov.githubsampleapp.UsersList.ListModel
+import com.example.npopov.githubsampleapp.UsersList.UsersListAdapter
 
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -18,7 +19,7 @@ class MainActivity : MvpAppCompatActivity(), ListView {
     lateinit var mListPresenter: ListPresenter
 
     @ProvidePresenter
-    fun provideListPresenter(): ListPresenter{
+    fun provideListPresenter(): ListPresenter {
         return ListPresenter(Repository.getInstance(this))
     }
 
@@ -26,12 +27,11 @@ class MainActivity : MvpAppCompatActivity(), ListView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         rw_trending.layoutManager = LinearLayoutManager(this)
-        mAdapter = UsersListAdapter(ArrayList<ListModel>(), this ,{
+        mAdapter = UsersListAdapter(ArrayList(), this, {
             //open Fragment details in Presenter
         })
-        mListPresenter.loadUsers()
         rw_trending.adapter = mAdapter
-        swipe_refresh.setOnClickListener{
+        swipe_refresh.setOnRefreshListener{
             mListPresenter.loadUsers()
         }
     }
@@ -45,10 +45,10 @@ class MainActivity : MvpAppCompatActivity(), ListView {
     }
 
     override fun startLoading() {
-        swipe_refresh.isRefreshing = true;
+        swipe_refresh.isRefreshing = true
     }
 
     override fun finishLoading() {
-        swipe_refresh.isRefreshing = false;
+        swipe_refresh.isRefreshing = false
     }
 }

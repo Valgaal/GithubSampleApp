@@ -1,11 +1,10 @@
-package com.example.npopov.githubsampleapp.Main
+package com.example.npopov.githubsampleapp
 
 import com.arellomobile.mvp.MvpView
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy
 import com.arellomobile.mvp.viewstate.strategy.OneExecutionStateStrategy
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
-import com.example.npopov.githubsampleapp.AddToEndSingleByTagStateStrategy
-import com.example.npopov.githubsampleapp.Models.User
+import com.example.npopov.githubsampleapp.UsersList.ListModel
 
 @StateStrategyType(AddToEndSingleStrategy::class)
 interface ListView : MvpView {

@@ -12,7 +12,7 @@ import retrofit2.Retrofit
 
 
 class Repository private constructor(context: Context){
-    private val BASE_SEARCH_URL = "https://api.github.com/users/"
+    private val BASE_SEARCH_URL = "https://api.github.com/"
     private var api: UsersApi;
 
     init {
@@ -25,7 +25,7 @@ class Repository private constructor(context: Context){
 
     }
 
-    public fun getUsers(since: Int): Observable<List<UserResponse>> {
+    fun getUsers(since: Int): Observable<List<UserResponse>> {
         return api.getUsers(since)
     }
 

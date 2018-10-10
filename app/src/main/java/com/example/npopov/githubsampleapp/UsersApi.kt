@@ -8,7 +8,7 @@ import retrofit2.http.Query
 
 interface UsersApi {
 
-    @GET()
+    @GET("users")
     fun getUsers(
             @Query("since") since: Int): Observable<List<UserResponse>>
 }

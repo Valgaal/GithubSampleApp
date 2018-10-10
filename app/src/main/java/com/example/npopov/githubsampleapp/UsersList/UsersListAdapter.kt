@@ -1,11 +1,10 @@
-package com.example.npopov.githubsampleapp.Main
+package com.example.npopov.githubsampleapp.UsersList
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.npopov.githubsampleapp.Models.User
 import com.example.npopov.githubsampleapp.R
 import com.squareup.picasso.Picasso
 
@@ -41,11 +40,13 @@ class UsersListAdapter(private var items: List<ListModel>,
             with(itemView) {
                 loginText.text = user.login
 
-                Picasso.get()
-                        .load(user.avatar_url)
-                        .resize(150,150)
-                        .centerInside()
-                        .into(poster);
+                if(user.avatar_url != "") {
+                    Picasso.get()
+                            .load(user.avatar_url)
+                            .resize(150, 150)
+                            .centerInside()
+                            .into(poster)
+                }
 
                 itemView.setOnClickListener { listener(user) }
             }
