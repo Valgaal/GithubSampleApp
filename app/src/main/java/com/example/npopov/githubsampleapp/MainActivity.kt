@@ -1,11 +1,14 @@
 package com.example.npopov.githubsampleapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
+import com.example.npopov.githubsampleapp.Details.DetailsActivity
+import com.example.npopov.githubsampleapp.Details.DetailsModel
 import com.example.npopov.githubsampleapp.Models.Repository
 import com.example.npopov.githubsampleapp.UsersList.ListModel
 import com.example.npopov.githubsampleapp.UsersList.UsersListAdapter
@@ -28,7 +31,7 @@ class MainActivity : MvpAppCompatActivity(), ListView {
         setContentView(R.layout.activity_main)
         rw_trending.layoutManager = LinearLayoutManager(this)
         mAdapter = UsersListAdapter(ArrayList(), this, {
-            //open Fragment details in Presenter
+            mListPresenter.userClicked(it)
         })
         rw_trending.adapter = mAdapter
         swipe_refresh.setOnRefreshListener{
@@ -51,4 +54,11 @@ class MainActivity : MvpAppCompatActivity(), ListView {
     override fun finishLoading() {
         swipe_refresh.isRefreshing = false
     }
+
+    override fun showUserDetails(login: String) {
+        val intent = Intent(this, DetailsActivity::class.java)
+        intent.putExtra(DetailsActivity.DETAILS, login)
+        startActivity(intent)
+    }
+
 }

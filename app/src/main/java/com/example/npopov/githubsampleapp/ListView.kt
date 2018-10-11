@@ -4,6 +4,7 @@ import com.arellomobile.mvp.MvpView
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy
 import com.arellomobile.mvp.viewstate.strategy.OneExecutionStateStrategy
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
+import com.example.npopov.githubsampleapp.Details.DetailsModel
 import com.example.npopov.githubsampleapp.UsersList.ListModel
 
 @StateStrategyType(AddToEndSingleStrategy::class)
@@ -19,5 +20,8 @@ interface ListView : MvpView {
 
     @StateStrategyType(value = AddToEndSingleByTagStateStrategy::class, tag = "TAG_LOADING")
     fun finishLoading()
+
+    @StateStrategyType(OneExecutionStateStrategy::class)
+    fun showUserDetails(login: String)
 
 }

@@ -17,7 +17,7 @@ class ListPresenter(private val repository: Repository): MvpPresenter<ListView>(
 
     fun loadUsers(){
         viewState.startLoading()
-       repository.getUsers(0)
+        repository.getUsers(0)
                .flatMapIterable { it -> it }
                .map { convertToListModel(it) }
                .toList()
@@ -33,11 +33,14 @@ class ListPresenter(private val repository: Repository): MvpPresenter<ListView>(
                            viewState.finishLoading()
                        }
                )
+
     }
 
     private fun  convertToListModel(userResponse: UserResponse ): ListModel {
         return ListModel(userResponse.login, userResponse.avatar_url)
     }
 
-
+    fun userClicked(listModel: ListModel){
+        viewState.showUserDetails(listModel.login)
+    }
 }
