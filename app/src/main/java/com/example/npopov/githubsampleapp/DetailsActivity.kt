@@ -1,12 +1,13 @@
-package com.example.npopov.githubsampleapp.Details
+package com.example.npopov.githubsampleapp
 
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.widget.ImageView
+import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.example.npopov.githubsampleapp.Models.Repository
-import com.example.npopov.githubsampleapp.R
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_details.*
 
@@ -16,14 +17,16 @@ class DetailsActivity: MvpAppCompatActivity(), DetailsView {
     @InjectPresenter
     lateinit var detailsPresenter: DetailsPresenter
 
+
+
     @ProvidePresenter
-    fun provideDetailsPresenter():DetailsPresenter{
+    fun provideDetailsPresenter(): DetailsPresenter {
 
         return DetailsPresenter(intent.getStringExtra(DETAILS), Repository.getInstance(this))
     }
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_details)
     }
 
@@ -38,7 +41,11 @@ class DetailsActivity: MvpAppCompatActivity(), DetailsView {
         }
         repos_count.text = detailsModel.reposCount.toString()
         linkToProfile.text = detailsModel.linkToProfile
-        titleName.text = detailsModel.login
+        titleName.text = detailsModel.name
+    }
+
+    override fun showError(message: String?) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     companion object {

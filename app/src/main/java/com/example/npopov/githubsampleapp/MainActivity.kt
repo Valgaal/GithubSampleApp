@@ -7,8 +7,6 @@ import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
-import com.example.npopov.githubsampleapp.Details.DetailsActivity
-import com.example.npopov.githubsampleapp.Details.DetailsModel
 import com.example.npopov.githubsampleapp.Models.Repository
 import com.example.npopov.githubsampleapp.UsersList.ListModel
 import com.example.npopov.githubsampleapp.UsersList.UsersListAdapter

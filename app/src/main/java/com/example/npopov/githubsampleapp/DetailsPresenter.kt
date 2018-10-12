@@ -1,4 +1,4 @@
-package com.example.npopov.githubsampleapp.Details
+package com.example.npopov.githubsampleapp
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
@@ -11,7 +11,6 @@ import io.reactivex.schedulers.Schedulers
 class DetailsPresenter(private val login:String,
                        private val repository: Repository): MvpPresenter<DetailsView>() {
     init {
-        viewState.startLoading()
         repository.getUserDetails(login)
                 .map { convertToDetailsModel(it) }
                 .subscribeOn(Schedulers.io())
@@ -19,17 +18,19 @@ class DetailsPresenter(private val login:String,
                 .subscribe(
                         {it ->
                             viewState.showDetails(it)
-                            viewState.finishLoading()
                         },
                         {error ->
                             viewState.showError(error.toString())
-                            viewState.finishLoading()
                         }
                 )
     }
 
-    private fun convertToDetailsModel(userDetailsResponse: UserDetailsResponse): DetailsModel{
-        return DetailsModel("","","",0)
+    private fun convertToDetailsModel(userDetailsResponse: UserDetailsResponse): DetailsModel {
+        return DetailsModel(
+                userDetailsResponse.avatar_url,
+                userDetailsResponse.html_url,
+                userDetailsResponse.name,
+                userDetailsResponse.public_repos)
     }
 
 }

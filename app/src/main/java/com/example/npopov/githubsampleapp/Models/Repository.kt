@@ -1,11 +1,9 @@
 package com.example.npopov.githubsampleapp.Models
 
 import android.content.Context
-import com.example.npopov.githubsampleapp.Details.DetailsModel
 import com.example.npopov.githubsampleapp.SingletonHolder
 import com.example.npopov.githubsampleapp.UsersApi
 import io.reactivex.Observable
-import io.reactivex.observables.ConnectableObservable
 import io.reactivex.schedulers.Schedulers
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
